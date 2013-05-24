@@ -1,1513 +1,772 @@
 package tingo
 
-func Colgroup(elements ...*Element) *Element {
-	// Table column group
+/*
 
-	element := &Element{
-		tagName:    "colgroup",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
+Document related
 
-func Figure(elements ...*Element) *Element {
-	// Figure with optional caption (HTML5)
+*/
 
-	element := &Element{
-		tagName:    "figure",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
+type HtmlElement struct{ *Element }
+type HeadElement struct{ *Element }
+type MetaElement struct{ *Element }
+type StyleElement struct{ *Element }
+type BodyElement struct{ *Element }
 
-func Dd(elements ...*Element) *Element {
-	// Description or value
-
-	element := &Element{
-		tagName:    "dd",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Rp(elements ...*Element) *Element {
-	// Ruby parenthesis (HTML5)
-
-	element := &Element{
-		tagName:    "rp",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Source(elements ...*Element) *Element {
-	// Media source (HTML5)
-
-	element := &Element{
-		tagName:    "source",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func U(elements ...*Element) *Element {
-	// Offset text conventionally styled with an underline
-
-	element := &Element{
-		tagName:    "u",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Meta(elements ...*Element) *Element {
-	// Metadata
-
-	element := &Element{
-		tagName:    "meta",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Ruby(elements ...*Element) *Element {
-	// Ruby annotation (HTML5)
-
-	element := &Element{
-		tagName:    "ruby",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Area(elements ...*Element) *Element {
-	// Image-map hyperlink
-
-	element := &Element{
-		tagName:    "area",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Aside(elements ...*Element) *Element {
-	// Tangential content (HTML5)
-
-	element := &Element{
-		tagName:    "aside",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Img(elements ...*Element) *Element {
-	// Image
-
-	element := &Element{
-		tagName:    "img",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Keygen(elements ...*Element) *Element {
-	// Key-pair generator/input control (HTML5)
-
-	element := &Element{
-		tagName:    "keygen",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Base(elements ...*Element) *Element {
-	// Base URL
-
-	element := &Element{
-		tagName:    "base",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Em(elements ...*Element) *Element {
-	// Emphatic stress
-
-	element := &Element{
-		tagName:    "em",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Wbr(elements ...*Element) *Element {
-	// Line-break opportunity (HTML5)
-
-	element := &Element{
-		tagName:    "wbr",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Article(elements ...*Element) *Element {
-	// Article (HTML5)
-
-	element := &Element{
-		tagName:    "article",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Del(elements ...*Element) *Element {
-	// Deleted text
-
-	element := &Element{
-		tagName:    "del",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Iframe(elements ...*Element) *Element {
-	// Nested browsing context (inline frame)
-
-	element := &Element{
-		tagName:    "iframe",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Strong(elements ...*Element) *Element {
-	// Strong importance
-
-	element := &Element{
-		tagName:    "strong",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Address(elements ...*Element) *Element {
-	// Contact information
-
-	element := &Element{
-		tagName:    "address",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Code(elements ...*Element) *Element {
-	// Code fragment
-
-	element := &Element{
-		tagName:    "code",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Form(elements ...*Element) *Element {
-	// User-submittable form
-
-	element := &Element{
-		tagName:    "form",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Object(elements ...*Element) *Element {
-	// Generic external content
-
-	element := &Element{
-		tagName:    "object",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Rt(elements ...*Element) *Element {
-	// Ruby text (HTML5)
-
-	element := &Element{
-		tagName:    "rt",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Col(elements ...*Element) *Element {
-	// Table column
-
-	element := &Element{
-		tagName:    "col",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Command(elements ...*Element) *Element {
-	// Command (HTML5)
-
-	element := &Element{
-		tagName:    "command",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Hr(elements ...*Element) *Element {
-	// Thematic break
-
-	element := &Element{
-		tagName:    "hr",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Button(elements ...*Element) *Element {
-	// Button
-
-	element := &Element{
-		tagName:    "button",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Figcaption(elements ...*Element) *Element {
-	// Figure caption (HTML5)
-
-	element := &Element{
-		tagName:    "figcaption",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Input(elements ...*Element) *Element {
-	// Input control
-
-	element := &Element{
-		tagName:    "input",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Sup(elements ...*Element) *Element {
-	// Superscript
-
-	element := &Element{
-		tagName:    "sup",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Blockquote(elements ...*Element) *Element {
-	// Block quotation
-
-	element := &Element{
-		tagName:    "blockquote",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func I(elements ...*Element) *Element {
-	// Offset text conventionally styled in italic
-
-	element := &Element{
-		tagName:    "i",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Legend(elements ...*Element) *Element {
-	// Title or explanatory caption
-
-	element := &Element{
-		tagName:    "legend",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Td(elements ...*Element) *Element {
-	// Table cell
-
-	element := &Element{
-		tagName:    "td",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Caption(elements ...*Element) *Element {
-	// Table title
-
-	element := &Element{
-		tagName:    "caption",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Textarea(elements ...*Element) *Element {
-	// Text input area
-
-	element := &Element{
-		tagName:    "textarea",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Div(elements ...*Element) *Element {
-	// Generic flow container
-
-	element := &Element{
-		tagName:    "div",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func H5(elements ...*Element) *Element {
-	// Heading
-
-	element := &Element{
-		tagName:    "h5",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Meter(elements ...*Element) *Element {
-	// Scalar gauge (HTML5)
-
-	element := &Element{
-		tagName:    "meter",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Section(elements ...*Element) *Element {
-	// Section (HTML5)
-
-	element := &Element{
-		tagName:    "section",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Details(elements ...*Element) *Element {
-	// Control for additional on-demand information (HTML5)
-
-	element := &Element{
-		tagName:    "details",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Pre(elements ...*Element) *Element {
-	// Preformatted text
-
-	element := &Element{
-		tagName:    "pre",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Bdi(elements ...*Element) *Element {
-	// BiDi isolate (HTML5)
-
-	element := &Element{
-		tagName:    "bdi",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func H3(elements ...*Element) *Element {
-	// Heading
-
-	element := &Element{
-		tagName:    "h3",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func H6(elements ...*Element) *Element {
-	// Heading
-
-	element := &Element{
-		tagName:    "h6",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Nav(elements ...*Element) *Element {
-	// Group of navigational links (HTML5)
-
-	element := &Element{
-		tagName:    "nav",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Header(elements ...*Element) *Element {
-	// Header (HTML5)
-
-	element := &Element{
-		tagName:    "header",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Optgroup(elements ...*Element) *Element {
-	// Group of options
-
-	element := &Element{
-		tagName:    "optgroup",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Param(elements ...*Element) *Element {
-	// Initialization parameters for plugins
-
-	element := &Element{
-		tagName:    "param",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Summary(elements ...*Element) *Element {
-	// Summary, caption, or legend for a details control (HTML5)
-
-	element := &Element{
-		tagName:    "summary",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Fieldset(elements ...*Element) *Element {
-	// Set of related form controls
-
-	element := &Element{
-		tagName:    "fieldset",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func H4(elements ...*Element) *Element {
-	// Heading
-
-	element := &Element{
-		tagName:    "h4",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Html(elements ...*Element) *Element {
+func Html(children ...ElementInterface) *HtmlElement {
 	// Root element
-
-	element := &Element{
-		tagName:    "html",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
+	return &HtmlElement{newElement("html", children)}
 }
 
-func Sub(elements ...*Element) *Element {
-	// Subscript
-
-	element := &Element{
-		tagName:    "sub",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Track(elements ...*Element) *Element {
-	// Supplementary media track (HTML5)
-
-	element := &Element{
-		tagName:    "track",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Embed(elements ...*Element) *Element {
-	// Integration point for plugins (HTML5)
-
-	element := &Element{
-		tagName:    "embed",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Abbr(elements ...*Element) *Element {
-	// Abbreviation
-
-	element := &Element{
-		tagName:    "abbr",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Body(elements ...*Element) *Element {
-	// Document body
-
-	element := &Element{
-		tagName:    "body",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Ol(elements ...*Element) *Element {
-	// Ordered list
-
-	element := &Element{
-		tagName:    "ol",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Output(elements ...*Element) *Element {
-	// Result of a calculation in a form (HTML5)
-
-	element := &Element{
-		tagName:    "output",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Small(elements ...*Element) *Element {
-	// Small print
-
-	element := &Element{
-		tagName:    "small",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func H1(elements ...*Element) *Element {
-	// Heading
-
-	element := &Element{
-		tagName:    "h1",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Head(elements ...*Element) *Element {
+func Head(children ...ElementInterface) *HeadElement {
 	// Document metadata container
-
-	element := &Element{
-		tagName:    "head",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
+	return &HeadElement{newElement("head", children)}
 }
 
-func Link(elements ...*Element) *Element {
-	// Inter-document relationship metadata
-
-	element := &Element{
-		tagName:    "link",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
+func Meta(children ...ElementInterface) *MetaElement {
+	// Metadata
+	return &MetaElement{newElement("meta", children)}
 }
 
-func Time(elements ...*Element) *Element {
-	// Date and/or time (HTML5)
-
-	element := &Element{
-		tagName:    "time",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Ul(elements ...*Element) *Element {
-	// Unordered list
-
-	element := &Element{
-		tagName:    "ul",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func B(elements ...*Element) *Element {
-	// Offset text conventionally styled in bold
-
-	element := &Element{
-		tagName:    "b",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Progress(elements ...*Element) *Element {
-	// Progress indicator (HTML5)
-
-	element := &Element{
-		tagName:    "progress",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Footer(elements ...*Element) *Element {
-	// Footer (HTML5)
-
-	element := &Element{
-		tagName:    "footer",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Noscript(elements ...*Element) *Element {
-	// Fallback content for script
-
-	element := &Element{
-		tagName:    "noscript",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Title(elements ...*Element) *Element {
-	// Document title
-
-	element := &Element{
-		tagName:    "title",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func P(elements ...*Element) *Element {
-	// Paragraph
-
-	element := &Element{
-		tagName:    "p",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Style(elements ...*Element) *Element {
+func Style(children ...ElementInterface) *StyleElement {
 	// Style (presentation) information
-
-	element := &Element{
-		tagName:    "style",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
+	return &StyleElement{newElement("style", children)}
 }
 
-func Tfoot(elements ...*Element) *Element {
-	// Table footer row group
-
-	element := &Element{
-		tagName:    "tfoot",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
+func Body(children ...ElementInterface) *BodyElement {
+	// Document body
+	return &BodyElement{newElement("body", children)}
 }
 
-func Video(elements ...*Element) *Element {
-	// Video (HTML5)
+/*
 
-	element := &Element{
-		tagName:    "video",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
+Formatting
+
+*/
+
+type BElement struct{ *Element }
+type IElement struct{ *Element }
+
+func B(children ...ElementInterface) *BElement {
+	// Offset text conventionally styled in bold
+	return &BElement{newElement("b", children)}
 }
 
-func Audio(elements ...*Element) *Element {
-	// Audio stream (HTML5)
-
-	element := &Element{
-		tagName:    "audio",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
+func I(children ...ElementInterface) *IElement {
+	// Offset text conventionally styled in italic
+	return &IElement{newElement("i", children)}
 }
 
-func Datalist(elements ...*Element) *Element {
-	// Predefined options for other controls (HTML5)
+type StrongElement struct{ *Element }
+type EmElement struct{ *Element }
+type SmallElement struct{ *Element }
 
-	element := &Element{
-		tagName:    "datalist",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
+func Strong(children ...ElementInterface) *StrongElement {
+	// Strong importance
+	return &StrongElement{newElement("strong", children)}
 }
 
-func Select(elements ...*Element) *Element {
-	// Option-selection form control
-
-	element := &Element{
-		tagName:    "select",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
+func Em(children ...ElementInterface) *EmElement {
+	// Emphatic stress
+	return &EmElement{newElement("em", children)}
 }
 
-func Dt(elements ...*Element) *Element {
-	// Term or name
-
-	element := &Element{
-		tagName:    "dt",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
+func Small(children ...ElementInterface) *SmallElement {
+	// Small print
+	return &SmallElement{newElement("small", children)}
 }
 
-func Hgroup(elements ...*Element) *Element {
-	// Heading group (HTML5)
+type SupElement struct{ *Element }
+type SubElement struct{ *Element }
 
-	element := &Element{
-		tagName:    "hgroup",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
+func Sup(children ...ElementInterface) *SupElement {
+	// Superscript
+	return &SupElement{newElement("sup", children)}
 }
 
-func Label(elements ...*Element) *Element {
-	// Caption for a form control
-
-	element := &Element{
-		tagName:    "label",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
+func Sub(children ...ElementInterface) *SubElement {
+	// Subscript
+	return &SubElement{newElement("sub", children)}
 }
 
-func Menu(elements ...*Element) *Element {
-	// List of commands
+type BrElement struct{ *Element }
+type HrElement struct{ *Element }
 
-	element := &Element{
-		tagName:    "menu",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func S(elements ...*Element) *Element {
-	// Struck text
-
-	element := &Element{
-		tagName:    "s",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Table(elements ...*Element) *Element {
-	// Table
-
-	element := &Element{
-		tagName:    "table",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Cite(elements ...*Element) *Element {
-	// Cited title of a work
-
-	element := &Element{
-		tagName:    "cite",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Mark(elements ...*Element) *Element {
-	// Marked (highlighted) text (HTML5)
-
-	element := &Element{
-		tagName:    "mark",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Samp(elements ...*Element) *Element {
-	// (sample) output
-
-	element := &Element{
-		tagName:    "samp",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Script(elements ...*Element) *Element {
-	// Embedded script
-
-	element := &Element{
-		tagName:    "script",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Tbody(elements ...*Element) *Element {
-	// Table row group
-
-	element := &Element{
-		tagName:    "tbody",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Canvas(elements ...*Element) *Element {
-	// Canvas for dynamic graphics (HTML5)
-
-	element := &Element{
-		tagName:    "canvas",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Dfn(elements ...*Element) *Element {
-	// Defining instance
-
-	element := &Element{
-		tagName:    "dfn",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Dl(elements ...*Element) *Element {
-	// Description list
-
-	element := &Element{
-		tagName:    "dl",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Li(elements ...*Element) *Element {
-	// List item
-
-	element := &Element{
-		tagName:    "li",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Q(elements ...*Element) *Element {
-	// Quoted text
-
-	element := &Element{
-		tagName:    "q",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Bdo(elements ...*Element) *Element {
-	// BiDi override
-
-	element := &Element{
-		tagName:    "bdo",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Tr(elements ...*Element) *Element {
-	// Table row
-
-	element := &Element{
-		tagName:    "tr",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
-}
-
-func Br(elements ...*Element) *Element {
+func Br(children ...ElementInterface) *BrElement {
 	// Line break
-
-	element := &Element{
-		tagName:    "br",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
+	return &BrElement{newElement("br", children)}
 }
 
-func Kbd(elements ...*Element) *Element {
-	// User input
-
-	element := &Element{
-		tagName:    "kbd",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
+func Hr(children ...ElementInterface) *HrElement {
+	// Thematic break
+	return &HrElement{newElement("hr", children)}
 }
 
-func Option(elements ...*Element) *Element {
-	// Option
+type CodeElement struct{ *Element }
+type BlockquoteElement struct{ *Element }
 
-	element := &Element{
-		tagName:    "option",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
+func Code(children ...ElementInterface) *CodeElement {
+	// Code fragment
+	return &CodeElement{newElement("code", children)}
 }
 
-func Span(elements ...*Element) *Element {
-	// Generic span
-
-	element := &Element{
-		tagName:    "span",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
+func Blockquote(children ...ElementInterface) *BlockquoteElement {
+	// Block quotation
+	return &BlockquoteElement{newElement("blockquote", children)}
 }
 
-func Th(elements ...*Element) *Element {
-	// Table header cell
+/*
 
-	element := &Element{
-		tagName:    "th",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
+Lists
+
+*/
+
+type UlElement struct{ *Element }
+type OlElement struct{ *Element }
+type LiElement struct{ *Element }
+
+func Ul(children ...ElementInterface) *UlElement {
+	// Unordered list
+	return &UlElement{newElement("ul", children)}
 }
 
-func Var(elements ...*Element) *Element {
-	// Variable or placeholder text
-
-	element := &Element{
-		tagName:    "var",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
+func Ol(children ...ElementInterface) *OlElement {
+	// Ordered list
+	return &OlElement{newElement("ol", children)}
 }
 
-func A(elements ...*Element) *Element {
-	// Hyperlink
-
-	element := &Element{
-		tagName:    "a",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
+func Li(children ...ElementInterface) *LiElement {
+	// List item
+	return &LiElement{newElement("li", children)}
 }
 
-func H2(elements ...*Element) *Element {
-	// Heading
+type DlElement struct{ *Element }
+type DdElement struct{ *Element }
 
-	element := &Element{
-		tagName:    "h2",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
+func Dl(children ...ElementInterface) *DlElement {
+	// Description list
+	return &DlElement{newElement("dl", children)}
 }
 
-func Ins(elements ...*Element) *Element {
-	// Inserted text
-
-	element := &Element{
-		tagName:    "ins",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
+func Dd(children ...ElementInterface) *DdElement {
+	// Description or value
+	return &DdElement{newElement("dd", children)}
 }
 
-func Map(elements ...*Element) *Element {
-	// Image-map definition
+/*
 
-	element := &Element{
-		tagName:    "map",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
+Table related
+
+*/
+
+type TableElement struct{ *Element }
+
+func Table(children ...ElementInterface) *TableElement {
+	// Table
+	return &TableElement{newElement("table", children)}
 }
 
-func Thead(elements ...*Element) *Element {
+type TheadElement struct{ *Element }
+type ThElement struct{ *Element }
+
+func Thead(children ...ElementInterface) *TheadElement {
 	// Table heading group
+	return &TheadElement{newElement("thead", children)}
+}
 
-	element := &Element{
-		tagName:    "thead",
-		attributes: make(map[string]string),
-		children:   elements,
-	}
-	for _, child := range elements {
-		child.parent = element
-	}
-	return element
+func Th(children ...ElementInterface) *ThElement {
+	// Table header cell
+	return &ThElement{newElement("th", children)}
+}
+
+type TbodyElement struct{ *Element }
+type TrElement struct{ *Element }
+type TdElement struct{ *Element }
+
+func Tbody(children ...ElementInterface) *TbodyElement {
+	// Table row group
+	return &TbodyElement{newElement("tbody", children)}
+}
+
+func Tr(children ...ElementInterface) *TrElement {
+	// Table row
+	return &TrElement{newElement("tr", children)}
+}
+
+func Td(children ...ElementInterface) *TdElement {
+	// Table cell
+	return &TdElement{newElement("td", children)}
+}
+
+type TfootElement struct{ *Element }
+
+func Tfoot(children ...ElementInterface) *TfootElement {
+	// Table footer row group
+	return &TfootElement{newElement("tfoot", children)}
+}
+
+type ColgroupElement struct{ *Element }
+type ColElement struct{ *Element }
+
+func Colgroup(children ...ElementInterface) *ColgroupElement {
+	// Table column group
+	return &ColgroupElement{newElement("colgroup", children)}
+}
+func Col(children ...ElementInterface) *ColElement {
+	// Table column
+	return &ColElement{newElement("col", children)}
+}
+
+/*
+
+Forms
+
+*/
+
+type FormElement struct{ *Element }
+type InputElement struct{ *Element }
+type ButtonElement struct{ *Element }
+type TextareaElement struct{ *Element }
+type SelectElement struct{ *Element }
+type OptionElement struct{ *Element }
+type OptgroupElement struct{ *Element }
+type LabelElement struct{ *Element }
+type FieldsetElement struct{ *Element }
+
+func Form(children ...ElementInterface) *FormElement {
+	// User-submittable form
+	return &FormElement{newElement("form", children)}
+}
+
+func Input(children ...ElementInterface) *InputElement {
+	// Input control
+	return &InputElement{newElement("input", children)}
+}
+
+func (i *InputElement) Type(t string) *InputElement {
+	i.attributes["type"] = t
+	return i
+}
+
+func Button(children ...ElementInterface) *ButtonElement {
+	// Button
+	return &ButtonElement{newElement("button", children)}
+}
+
+func Textarea(children ...ElementInterface) *TextareaElement {
+	// Text input area
+	return &TextareaElement{newElement("textarea", children)}
+}
+
+func Select(children ...ElementInterface) *SelectElement {
+	// Option-selection form control
+	return &SelectElement{newElement("select", children)}
+}
+
+func Option(children ...ElementInterface) *OptionElement {
+	// Option
+	return &OptionElement{newElement("option", children)}
+}
+
+func Optgroup(children ...ElementInterface) *OptgroupElement {
+	// Group of options
+	return &OptgroupElement{newElement("optgroup", children)}
+}
+
+func Label(children ...ElementInterface) *LabelElement {
+	// Caption for a form control
+	return &LabelElement{newElement("label", children)}
+}
+
+func Fieldset(children ...ElementInterface) *FieldsetElement {
+	// Set of related form controls
+	return &FieldsetElement{newElement("fieldset", children)}
+}
+
+/*
+
+Headings
+
+*/
+
+type H1Element struct{ *Element }
+type H2Element struct{ *Element }
+type H3Element struct{ *Element }
+type H4Element struct{ *Element }
+type H5Element struct{ *Element }
+type H6Element struct{ *Element }
+type HgroupElement struct{ *Element }
+
+func H1(children ...ElementInterface) *H1Element {
+	// Heading
+	return &H1Element{newElement("h1", children)}
+}
+
+func H2(children ...ElementInterface) *H2Element {
+	// Heading
+	return &H2Element{newElement("h2", children)}
+}
+
+func H3(children ...ElementInterface) *H3Element {
+	// Heading
+	return &H3Element{newElement("h3", children)}
+}
+
+func H4(children ...ElementInterface) *H4Element {
+	// Heading
+	return &H4Element{newElement("h4", children)}
+}
+
+func H5(children ...ElementInterface) *H5Element {
+	// Heading
+	return &H5Element{newElement("h5", children)}
+}
+
+func H6(children ...ElementInterface) *H6Element {
+	// Heading
+	return &H6Element{newElement("h6", children)}
+}
+
+func Hgroup(children ...ElementInterface) *HgroupElement {
+	// Heading group (HTML5)
+	return &HgroupElement{newElement("hgroup", children)}
+}
+
+/*
+
+TODO: Organize the elements below
+
+*/
+
+type VarElement struct{ *Element }
+
+func Var(children ...ElementInterface) *VarElement {
+	// Variable or placeholder text
+	return &VarElement{newElement("var", children)}
+}
+
+type LinkElement struct{ *Element }
+
+func Link(children ...ElementInterface) *LinkElement {
+	// Inter-document relationship metadata
+	return &LinkElement{newElement("link", children)}
+}
+
+type OutputElement struct{ *Element }
+
+func Output(children ...ElementInterface) *OutputElement {
+	// Result of a calculation in a form (HTML5)
+	return &OutputElement{newElement("output", children)}
+}
+
+type AddressElement struct{ *Element }
+
+func Address(children ...ElementInterface) *AddressElement {
+	// Contact information
+	return &AddressElement{newElement("address", children)}
+}
+
+type BdiElement struct{ *Element }
+
+func Bdi(children ...ElementInterface) *BdiElement {
+	// BiDi isolate (HTML5)
+	return &BdiElement{newElement("bdi", children)}
+}
+
+type CiteElement struct{ *Element }
+
+func Cite(children ...ElementInterface) *CiteElement {
+	// Cited title of a work
+	return &CiteElement{newElement("cite", children)}
+}
+
+type VideoElement struct{ *Element }
+
+func Video(children ...ElementInterface) *VideoElement {
+	// Video (HTML5)
+	return &VideoElement{newElement("video", children)}
+}
+
+type IframeElement struct{ *Element }
+
+func Iframe(children ...ElementInterface) *IframeElement {
+	// Nested browsing context (inline frame)
+	return &IframeElement{newElement("iframe", children)}
+}
+
+type ArticleElement struct{ *Element }
+
+func Article(children ...ElementInterface) *ArticleElement {
+	// Article (HTML5)
+	return &ArticleElement{newElement("article", children)}
+}
+
+type CaptionElement struct{ *Element }
+
+func Caption(children ...ElementInterface) *CaptionElement {
+	// Table title
+	return &CaptionElement{newElement("caption", children)}
+}
+
+type ParamElement struct{ *Element }
+
+func Param(children ...ElementInterface) *ParamElement {
+	// Initialization parameters for plugins
+	return &ParamElement{newElement("param", children)}
+}
+
+type AsideElement struct{ *Element }
+
+func Aside(children ...ElementInterface) *AsideElement {
+	// Tangential content (HTML5)
+	return &AsideElement{newElement("aside", children)}
+}
+
+type MapElement struct{ *Element }
+
+func Map(children ...ElementInterface) *MapElement {
+	// Image-map definition
+	return &MapElement{newElement("map", children)}
+}
+
+type FigureElement struct{ *Element }
+
+func Figure(children ...ElementInterface) *FigureElement {
+	// Figure with optional caption (HTML5)
+	return &FigureElement{newElement("figure", children)}
+}
+
+type NavElement struct{ *Element }
+
+func Nav(children ...ElementInterface) *NavElement {
+	// Group of navigational links (HTML5)
+	return &NavElement{newElement("nav", children)}
+}
+
+type RubyElement struct{ *Element }
+
+func Ruby(children ...ElementInterface) *RubyElement {
+	// Ruby annotation (HTML5)
+	return &RubyElement{newElement("ruby", children)}
+}
+
+type EmbedElement struct{ *Element }
+
+func Embed(children ...ElementInterface) *EmbedElement {
+	// Integration point for plugins (HTML5)
+	return &EmbedElement{newElement("embed", children)}
+}
+
+type SampElement struct{ *Element }
+
+func Samp(children ...ElementInterface) *SampElement {
+	// (sample) output
+	return &SampElement{newElement("samp", children)}
+}
+
+type SectionElement struct{ *Element }
+
+func Section(children ...ElementInterface) *SectionElement {
+	// Section (HTML5)
+	return &SectionElement{newElement("section", children)}
+}
+
+type AudioElement struct{ *Element }
+
+func Audio(children ...ElementInterface) *AudioElement {
+	// Audio stream (HTML5)
+	return &AudioElement{newElement("audio", children)}
+}
+
+type DtElement struct{ *Element }
+
+func Dt(children ...ElementInterface) *DtElement {
+	// Term or name
+	return &DtElement{newElement("dt", children)}
+}
+
+type DfnElement struct{ *Element }
+
+func Dfn(children ...ElementInterface) *DfnElement {
+	// Defining instance
+	return &DfnElement{newElement("dfn", children)}
+}
+
+type ObjectElement struct{ *Element }
+
+func Object(children ...ElementInterface) *ObjectElement {
+	// Generic external content
+	return &ObjectElement{newElement("object", children)}
+}
+
+type ProgressElement struct{ *Element }
+
+func Progress(children ...ElementInterface) *ProgressElement {
+	// Progress indicator (HTML5)
+	return &ProgressElement{newElement("progress", children)}
+}
+
+type FigcaptionElement struct{ *Element }
+
+func Figcaption(children ...ElementInterface) *FigcaptionElement {
+	// Figure caption (HTML5)
+	return &FigcaptionElement{newElement("figcaption", children)}
+}
+
+type WbrElement struct{ *Element }
+
+func Wbr(children ...ElementInterface) *WbrElement {
+	// Line-break opportunity (HTML5)
+	return &WbrElement{newElement("wbr", children)}
+}
+
+type CanvasElement struct{ *Element }
+
+func Canvas(children ...ElementInterface) *CanvasElement {
+	// Canvas for dynamic graphics (HTML5)
+	return &CanvasElement{newElement("canvas", children)}
+}
+
+type HeaderElement struct{ *Element }
+
+func Header(children ...ElementInterface) *HeaderElement {
+	// Header (HTML5)
+	return &HeaderElement{newElement("header", children)}
+}
+
+type KeygenElement struct{ *Element }
+
+func Keygen(children ...ElementInterface) *KeygenElement {
+	// Key-pair generator/input control (HTML5)
+	return &KeygenElement{newElement("keygen", children)}
+}
+
+type DelElement struct{ *Element }
+
+func Del(children ...ElementInterface) *DelElement {
+	// Deleted text
+	return &DelElement{newElement("del", children)}
+}
+
+type DetailsElement struct{ *Element }
+
+func Details(children ...ElementInterface) *DetailsElement {
+	// Control for additional on-demand information (HTML5)
+	return &DetailsElement{newElement("details", children)}
+}
+
+type SpanElement struct{ *Element }
+
+func Span(children ...ElementInterface) *SpanElement {
+	// Generic span
+	return &SpanElement{newElement("span", children)}
+}
+
+type MeterElement struct{ *Element }
+
+func Meter(children ...ElementInterface) *MeterElement {
+	// Scalar gauge (HTML5)
+	return &MeterElement{newElement("meter", children)}
+}
+
+type NoscriptElement struct{ *Element }
+
+func Noscript(children ...ElementInterface) *NoscriptElement {
+	// Fallback content for script
+	return &NoscriptElement{newElement("noscript", children)}
+}
+
+type AreaElement struct{ *Element }
+
+func Area(children ...ElementInterface) *AreaElement {
+	// Image-map hyperlink
+	return &AreaElement{newElement("area", children)}
+}
+
+type PElement struct{ *Element }
+
+func P(children ...ElementInterface) *PElement {
+	// Paragraph
+	return &PElement{newElement("p", children)}
+}
+
+type BaseElement struct{ *Element }
+
+func Base(children ...ElementInterface) *BaseElement {
+	// Base URL
+	return &BaseElement{newElement("base", children)}
+}
+
+type DivElement struct{ *Element }
+
+func Div(children ...ElementInterface) *DivElement {
+	// Generic flow container
+	return &DivElement{newElement("div", children)}
+}
+
+type TrackElement struct{ *Element }
+
+func Track(children ...ElementInterface) *TrackElement {
+	// Supplementary media track (HTML5)
+	return &TrackElement{newElement("track", children)}
+}
+
+type DatalistElement struct{ *Element }
+
+func Datalist(children ...ElementInterface) *DatalistElement {
+	// Predefined options for other controls (HTML5)
+	return &DatalistElement{newElement("datalist", children)}
+}
+
+type FooterElement struct{ *Element }
+
+func Footer(children ...ElementInterface) *FooterElement {
+	// Footer (HTML5)
+	return &FooterElement{newElement("footer", children)}
+}
+
+type QElement struct{ *Element }
+
+func Q(children ...ElementInterface) *QElement {
+	// Quoted text
+	return &QElement{newElement("q", children)}
+}
+
+type ImgElement struct{ *Element }
+
+func Img(children ...ElementInterface) *ImgElement {
+	// Image
+	return &ImgElement{newElement("img", children)}
+}
+
+type SourceElement struct{ *Element }
+
+func Source(children ...ElementInterface) *SourceElement {
+	// Media source (HTML5)
+	return &SourceElement{newElement("source", children)}
+}
+
+type MenuElement struct{ *Element }
+
+func Menu(children ...ElementInterface) *MenuElement {
+	// List of commands
+	return &MenuElement{newElement("menu", children)}
+}
+
+type TitleElement struct{ *Element }
+
+func Title(children ...ElementInterface) *TitleElement {
+	// Document title
+	return &TitleElement{newElement("title", children)}
+}
+
+type AElement struct{ *Element }
+
+func A(children ...ElementInterface) *AElement {
+	// Hyperlink
+	return &AElement{newElement("a", children)}
+}
+
+type TimeElement struct{ *Element }
+
+func Time(children ...ElementInterface) *TimeElement {
+	// Date and/or time (HTML5)
+	return &TimeElement{newElement("time", children)}
+}
+
+type MarkElement struct{ *Element }
+
+func Mark(children ...ElementInterface) *MarkElement {
+	// Marked (highlighted) text (HTML5)
+	return &MarkElement{newElement("mark", children)}
+}
+
+type BdoElement struct{ *Element }
+
+func Bdo(children ...ElementInterface) *BdoElement {
+	// BiDi override
+	return &BdoElement{newElement("bdo", children)}
+}
+
+type InsElement struct{ *Element }
+
+func Ins(children ...ElementInterface) *InsElement {
+	// Inserted text
+	return &InsElement{newElement("ins", children)}
+}
+
+type SElement struct{ *Element }
+
+func S(children ...ElementInterface) *SElement {
+	// Struck text
+	return &SElement{newElement("s", children)}
+}
+
+type UElement struct{ *Element }
+
+func U(children ...ElementInterface) *UElement {
+	// Offset text conventionally styled with an underline
+	return &UElement{newElement("u", children)}
+}
+
+type AbbrElement struct{ *Element }
+
+func Abbr(children ...ElementInterface) *AbbrElement {
+	// Abbreviation
+	return &AbbrElement{newElement("abbr", children)}
+}
+
+type KbdElement struct{ *Element }
+
+func Kbd(children ...ElementInterface) *KbdElement {
+	// User input
+	return &KbdElement{newElement("kbd", children)}
+}
+
+type LegendElement struct{ *Element }
+
+func Legend(children ...ElementInterface) *LegendElement {
+	// Title or explanatory caption
+	return &LegendElement{newElement("legend", children)}
+}
+
+type RpElement struct{ *Element }
+
+func Rp(children ...ElementInterface) *RpElement {
+	// Ruby parenthesis (HTML5)
+	return &RpElement{newElement("rp", children)}
+}
+
+type PreElement struct{ *Element }
+
+func Pre(children ...ElementInterface) *PreElement {
+	// Preformatted text
+	return &PreElement{newElement("pre", children)}
+}
+
+type CommandElement struct{ *Element }
+
+func Command(children ...ElementInterface) *CommandElement {
+	// Command (HTML5)
+	return &CommandElement{newElement("command", children)}
+}
+
+type ScriptElement struct{ *Element }
+
+func Script(children ...ElementInterface) *ScriptElement {
+	// Embedded script
+	return &ScriptElement{newElement("script", children)}
+}
+
+type RtElement struct{ *Element }
+
+func Rt(children ...ElementInterface) *RtElement {
+	// Ruby text (HTML5)
+	return &RtElement{newElement("rt", children)}
+}
+
+type SummaryElement struct{ *Element }
+
+func Summary(children ...ElementInterface) *SummaryElement {
+	// Summary, caption, or legend for a details control (HTML5)
+	return &SummaryElement{newElement("summary", children)}
 }

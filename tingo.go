@@ -5,47 +5,68 @@ import (
 	"strings"
 )
 
+type ElementInterface interface {
+	setParent(parent ElementInterface) ElementInterface
+	getParent() ElementInterface
+	Id(i string) ElementInterface
+	Class(c string) ElementInterface
+	If(b bool) ElementInterface
+	Before(text string) ElementInterface
+	After(text string) ElementInterface
+	Render() (data string)
+	RenderIndent(indent string) (data string)
+}
+
 type Element struct {
 	tagName    string
 	attributes map[string]string
 	isHidden   bool
 	before     string
-	children   []*Element
+	children   []ElementInterface
 	after      string
-	parent     *Element
+	parent     ElementInterface
 }
 
-type ElementFunc func(elements ...*Element) *Element
+func (t *Element) setParent(parent ElementInterface) ElementInterface {
+	t.parent = parent
+	return t
+}
 
-func (t *Element) Id(i string) *Element {
+func (t *Element) getParent() ElementInterface {
+	return t.parent
+}
+
+func (t *Element) Id(i string) ElementInterface {
 	t.attributes["id"] = i
 	return t
 }
 
-func (t *Element) Class(c string) *Element {
+func (t *Element) Class(c string) ElementInterface {
 	t.attributes["class"] = c
 	return t
 }
 
-func (t *Element) If(b bool) *Element {
+func (t *Element) If(b bool) ElementInterface {
 	t.isHidden = !b
 	return t
 }
 
-func (t *Element) Before(text string) *Element {
+func (t *Element) Before(text string) ElementInterface {
 	t.before = text
 	return t
 }
 
-func (t *Element) After(text string) *Element {
+func (t *Element) After(text string) ElementInterface {
 	t.after = text
 	return t
 }
 
+type ElementFunc func(elements ...*Element) *Element
+
 func (t *Element) Loop(f ElementFunc, values []string) *Element {
 	for _, value := range values {
 		child := f().Before(fmt.Sprintf("%v", value))
-		child.parent = t
+		child.setParent(t)
 		t.children = append(t.children, child)
 	}
 	return t
@@ -93,7 +114,7 @@ func (t *Element) RenderIndent(indent string) (data string) {
 		depth := 0
 		parent := t.parent
 		for parent != nil {
-			parent = parent.parent
+			parent = parent.getParent()
 			depth++
 		}
 		nextIndent := strings.Repeat(indent, depth)
@@ -101,11 +122,17 @@ func (t *Element) RenderIndent(indent string) (data string) {
 		// Make sure text before / after is also indented
 		before := t.before
 		if len(before) > 0 {
-			before = fmt.Sprintf("%v%v%v\n", indent, nextIndent, before)
+			before = fmt.Sprintf("%v%v%v", indent, nextIndent, before)
+			if len(children) > 0 {
+				before = fmt.Sprintf("%v\n", before)
+			}
 		}
 		after := t.after
 		if len(after) > 0 {
 			after = fmt.Sprintf("\n%v%v%v", indent, nextIndent, after)
+			if len(children) > 0 {
+				after = fmt.Sprintf("%v\n", after)
+			}
 		}
 
 		// Format with indentation
@@ -122,4 +149,16 @@ func (t *Element) RenderIndent(indent string) (data string) {
 		)
 	}
 	return
+}
+
+func newElement(tagName string, children []ElementInterface) *Element {
+	element := &Element{
+		tagName:    tagName,
+		attributes: make(map[string]string),
+		children:   children,
+	}
+	for _, child := range children {
+		child.setParent(element)
+	}
+	return element
 }

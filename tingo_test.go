@@ -13,7 +13,7 @@ func ExampleBody() {
 func TestRender(t *testing.T) {
 	Body(
 		Div(
-			Ul().Loop(Li, []string{"First list item", "Second one", "And the third!"}),
+			//Ul().Loop(Li, []string{"First list item", "Second one", "And the third!"}),
 			P().Class("green"),
 		).Id("main").Before("Lorem ipsum...").After("Sit amet"),
 	).Render()
@@ -22,7 +22,7 @@ func TestRender(t *testing.T) {
 func TestRenderIndent(t *testing.T) {
 	Body(
 		Div(
-			Ul().Loop(Li, []string{"First list item", "Second one", "And the third!"}),
+			//Ul().Loop(Li, []string{"First list item", "Second one", "And the third!"}),
 			P().Class("green"),
 		).Id("main").Before("Lorem ipsum...").After("Sit amet"),
 	).RenderIndent("  ")
@@ -33,7 +33,7 @@ func TestRenderIndent(t *testing.T) {
 		),
 		Body(
 			H1().Before("This is a test"),
-			Input(),
+			Input().Type("text"),
 		),
 	).RenderIndent("\t"))
 }
