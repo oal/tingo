@@ -61,17 +61,6 @@ func (t *Element) After(text string) ElementInterface {
 	return t
 }
 
-type ElementFunc func(elements ...*Element) *Element
-
-func (t *Element) Loop(f ElementFunc, values []string) *Element {
-	for _, value := range values {
-		child := f().Before(fmt.Sprintf("%v", value))
-		child.setParent(t)
-		t.children = append(t.children, child)
-	}
-	return t
-}
-
 func (t *Element) Render() (data string) {
 	if !t.isHidden {
 		attributes := make([]string, 0)

@@ -10,10 +10,31 @@ func ExampleBody() {
 	// Output: <body></body>
 }
 
+func BenchmarkBody(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		Body().Render()
+	}
+}
+
+func BenchmarkBasic(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		Body(
+			Header(
+				H1().Before("Hello World!"),
+			).Id("top"),
+			Section(
+				P().Class("message").Before("This is a benchmark."),
+			).Id("main"),
+			Footer(
+				Span().Class("credits").Before("Generated with Tingo"),
+			).Id("bottom"),
+		).Render()
+	}
+}
+
 func TestRender(t *testing.T) {
 	Body(
 		Div(
-			//Ul().Loop(Li, []string{"First list item", "Second one", "And the third!"}),
 			P().Class("green"),
 		).Id("main").Before("Lorem ipsum...").After("Sit amet"),
 	).Render()
@@ -22,7 +43,6 @@ func TestRender(t *testing.T) {
 func TestRenderIndent(t *testing.T) {
 	Body(
 		Div(
-			//Ul().Loop(Li, []string{"First list item", "Second one", "And the third!"}),
 			P().Class("green"),
 		).Id("main").Before("Lorem ipsum...").After("Sit amet"),
 	).RenderIndent("  ")
