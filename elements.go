@@ -15,8 +15,8 @@ func Html(children ...ElementInterface) *HtmlElement {
 
 type HeadElement struct{ *Element }
 type TitleElement struct{ *Element }
-type MetaElement struct{ *Element }
-type LinkElement struct{ *Element }
+type MetaElement struct{ *VoidElement }
+type LinkElement struct{ *VoidElement }
 type StyleElement struct{ *Element }
 type ScriptElement struct{ *Element }
 
@@ -28,13 +28,13 @@ func Title(children ...ElementInterface) *TitleElement {
 	// Document title
 	return &TitleElement{newElement("title", children)}
 }
-func Meta(children ...ElementInterface) *MetaElement {
+func Meta() *MetaElement {
 	// Metadata
-	return &MetaElement{newElement("meta", children)}
+	return &MetaElement{newVoidElement("meta")}
 }
-func Link(children ...ElementInterface) *LinkElement {
+func Link() *LinkElement {
 	// Inter-document relationship metadata
-	return &LinkElement{newElement("link", children)}
+	return &LinkElement{newVoidElement("link")}
 }
 func Style(children ...ElementInterface) *StyleElement {
 	// Style (presentation) information
@@ -208,7 +208,7 @@ Forms
 */
 
 type FormElement struct{ *Element }
-type InputElement struct{ *Element }
+type InputElement struct{ *VoidElement }
 type ButtonElement struct{ *Element }
 type TextareaElement struct{ *Element }
 type SelectElement struct{ *Element }
@@ -219,9 +219,9 @@ func Form(children ...ElementInterface) *FormElement {
 	// User-submittable form
 	return &FormElement{newElement("form", children)}
 }
-func Input(children ...ElementInterface) *InputElement {
+func Input() *InputElement {
 	// Input control
-	return &InputElement{newElement("input", children)}
+	return &InputElement{newVoidElement("input")}
 }
 func (i *InputElement) Type(t string) *InputElement {
 	i.attributes["type"] = t
@@ -267,7 +267,7 @@ func Label(children ...ElementInterface) *LabelElement {
 }
 
 type ProgressElement struct{ *Element }
-type KeygenElement struct{ *Element }
+type KeygenElement struct{ *VoidElement }
 type OutputElement struct{ *Element }
 type MeterElement struct{ *Element }
 
@@ -275,9 +275,9 @@ func Progress(children ...ElementInterface) *ProgressElement {
 	// Progress indicator (HTML5)
 	return &ProgressElement{newElement("progress", children)}
 }
-func Keygen(children ...ElementInterface) *KeygenElement {
+func Keygen() *KeygenElement {
 	// Key-pair generator/input control (HTML5)
-	return &KeygenElement{newElement("keygen", children)}
+	return &KeygenElement{newVoidElement("keygen")}
 }
 func Output(children ...ElementInterface) *OutputElement {
 	// Result of a calculation in a form (HTML5)
@@ -343,15 +343,15 @@ func Tfoot(children ...ElementInterface) *TfootElement {
 }
 
 type ColgroupElement struct{ *Element }
-type ColElement struct{ *Element }
+type ColElement struct{ *VoidElement }
 
 func Colgroup(children ...ElementInterface) *ColgroupElement {
 	// Table column group
 	return &ColgroupElement{newElement("colgroup", children)}
 }
-func Col(children ...ElementInterface) *ColElement {
+func Col() *ColElement {
 	// Table column
-	return &ColElement{newElement("col", children)}
+	return &ColElement{newVoidElement("col")}
 }
 
 /*
@@ -416,16 +416,16 @@ func Sub(children ...ElementInterface) *SubElement {
 	return &SubElement{newElement("sub", children)}
 }
 
-type BrElement struct{ *Element }
-type HrElement struct{ *Element }
+type BrElement struct{ *VoidElement }
+type HrElement struct{ *VoidElement }
 
-func Br(children ...ElementInterface) *BrElement {
+func Br() *BrElement {
 	// Line break
-	return &BrElement{newElement("br", children)}
+	return &BrElement{newVoidElement("br")}
 }
-func Hr(children ...ElementInterface) *HrElement {
+func Hr() *HrElement {
 	// Thematic break
-	return &HrElement{newElement("hr", children)}
+	return &HrElement{newVoidElement("hr")}
 }
 
 type CodeElement struct{ *Element }
@@ -463,21 +463,21 @@ func Canvas(children ...ElementInterface) *CanvasElement {
 	return &CanvasElement{newElement("canvas", children)}
 }
 
-type EmbedElement struct{ *Element }
+type EmbedElement struct{ *VoidElement }
 type ObjectElement struct{ *Element }
-type ParamElement struct{ *Element }
+type ParamElement struct{ *VoidElement }
 
 func Embed(children ...ElementInterface) *EmbedElement {
 	// Integration point for plugins (HTML5)
-	return &EmbedElement{newElement("embed", children)}
+	return &EmbedElement{newVoidElement("embed")}
 }
 func Object(children ...ElementInterface) *ObjectElement {
 	// Generic external content
 	return &ObjectElement{newElement("object", children)}
 }
-func Param(children ...ElementInterface) *ParamElement {
+func Param() *ParamElement {
 	// Initialization parameters for plugins
-	return &ParamElement{newElement("param", children)}
+	return &ParamElement{newVoidElement("param")}
 }
 
 /*
@@ -556,11 +556,11 @@ func Figcaption(children ...ElementInterface) *FigcaptionElement {
 	return &FigcaptionElement{newElement("figcaption", children)}
 }
 
-type WbrElement struct{ *Element }
+type WbrElement struct{ *VoidElement }
 
-func Wbr(children ...ElementInterface) *WbrElement {
+func Wbr() *WbrElement {
 	// Line-break opportunity (HTML5)
-	return &WbrElement{newElement("wbr", children)}
+	return &WbrElement{newVoidElement("wbr")}
 }
 
 type DetailsElement struct{ *Element }
@@ -584,11 +584,11 @@ func Noscript(children ...ElementInterface) *NoscriptElement {
 	return &NoscriptElement{newElement("noscript", children)}
 }
 
-type AreaElement struct{ *Element }
+type AreaElement struct{ *VoidElement }
 
-func Area(children ...ElementInterface) *AreaElement {
+func Area() *AreaElement {
 	// Image-map hyperlink
-	return &AreaElement{newElement("area", children)}
+	return &AreaElement{newVoidElement("area")}
 }
 
 type PElement struct{ *Element }
@@ -598,18 +598,18 @@ func P(children ...ElementInterface) *PElement {
 	return &PElement{newElement("p", children)}
 }
 
-type BaseElement struct{ *Element }
+type BaseElement struct{ *VoidElement }
 
-func Base(children ...ElementInterface) *BaseElement {
+func Base() *BaseElement {
 	// Base URL
-	return &BaseElement{newElement("base", children)}
+	return &BaseElement{newVoidElement("base")}
 }
 
-type TrackElement struct{ *Element }
+type TrackElement struct{ *VoidElement }
 
-func Track(children ...ElementInterface) *TrackElement {
+func Track() *TrackElement {
 	// Supplementary media track (HTML5)
-	return &TrackElement{newElement("track", children)}
+	return &TrackElement{newVoidElement("track")}
 }
 
 type DatalistElement struct{ *Element }
@@ -626,18 +626,18 @@ func Q(children ...ElementInterface) *QElement {
 	return &QElement{newElement("q", children)}
 }
 
-type ImgElement struct{ *Element }
+type ImgElement struct{ *VoidElement }
 
-func Img(children ...ElementInterface) *ImgElement {
+func Img() *ImgElement {
 	// Image
-	return &ImgElement{newElement("img", children)}
+	return &ImgElement{newVoidElement("img")}
 }
 
-type SourceElement struct{ *Element }
+type SourceElement struct{ *VoidElement }
 
-func Source(children ...ElementInterface) *SourceElement {
+func Source() *SourceElement {
 	// Media source (HTML5)
-	return &SourceElement{newElement("source", children)}
+	return &SourceElement{newVoidElement("source")}
 }
 
 type MenuElement struct{ *Element }
@@ -703,11 +703,11 @@ func Pre(children ...ElementInterface) *PreElement {
 	return &PreElement{newElement("pre", children)}
 }
 
-type CommandElement struct{ *Element }
+type CommandElement struct{ *VoidElement }
 
-func Command(children ...ElementInterface) *CommandElement {
+func Command() *CommandElement {
 	// Command (HTML5)
-	return &CommandElement{newElement("command", children)}
+	return &CommandElement{newVoidElement("command")}
 }
 
 type RtElement struct{ *Element }

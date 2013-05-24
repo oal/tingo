@@ -32,6 +32,22 @@ func BenchmarkBasic(b *testing.B) {
 	}
 }
 
+func BenchmarkBasicIndented(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		Body(
+			Header(
+				H1().Before("Hello World!"),
+			).Id("top"),
+			Section(
+				P().Class("message").Before("This is a benchmark."),
+			).Id("main"),
+			Footer(
+				Span().Class("credits").Before("Generated with Tingo"),
+			).Id("bottom"),
+		).RenderIndent("\t")
+	}
+}
+
 func TestRender(t *testing.T) {
 	Body(
 		Div(

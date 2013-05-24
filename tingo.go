@@ -151,3 +151,71 @@ func newElement(tagName string, children []ElementInterface) *Element {
 	}
 	return element
 }
+
+// Override rendering for void elements / self closing elements such as <br>, <img> etc.
+
+type VoidElement struct{ *Element }
+
+func (t *VoidElement) Render() (data string) {
+	if !t.isHidden {
+		attributes := make([]string, 0)
+		for key, val := range t.attributes {
+			attributes = append(attributes, fmt.Sprintf(` %v="%v"`, key, val))
+		}
+
+		children := make([]string, 0)
+		for _, child := range t.children {
+			children = append(children, child.Render())
+		}
+
+		// Format
+		data = fmt.Sprintf(
+			`<%v%v>`,
+			t.tagName,
+			strings.Join(attributes, ""),
+		)
+	}
+	return
+}
+
+func (t *VoidElement) RenderIndent(indent string) (data string) {
+	if !t.isHidden {
+		attributes := make([]string, 0)
+		for key, val := range t.attributes {
+			attributes = append(attributes, fmt.Sprintf(` %v="%v"`, key, val))
+		}
+
+		children := make([]string, 0)
+		for _, child := range t.children {
+			children = append(children, child.RenderIndent(indent))
+		}
+
+		// Calculate depth to find indention level
+		depth := 0
+		parent := t.parent
+		for parent != nil {
+			parent = parent.getParent()
+			depth++
+		}
+		indent = strings.Repeat(indent, depth)
+
+		// Format with indentation
+		data = fmt.Sprintf(
+			"%v<%v%v>",
+			indent,
+			t.tagName,
+			strings.Join(attributes, ""),
+		)
+	}
+	return
+}
+
+func newVoidElement(tagName string) *VoidElement {
+	element := &VoidElement{
+		&Element{
+			tagName:    tagName,
+			attributes: make(map[string]string),
+		},
+	}
+	return element
+}
