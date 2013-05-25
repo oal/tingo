@@ -120,49 +120,54 @@ func (el *Element) RenderIndent(indent string) string {
 		parent = parent.parent
 		depth++
 	}
-	fmt.Println(depth)
 	nextIndent := strings.Repeat(indent, depth)
 
 	if el.isVoid {
 		// Format
 		return fmt.Sprintf(
 			"%v<%v%v>",
-			indent,
+			nextIndent,
 			el.tagName,
 			strings.Join(attributes, ""),
 		)
 	} else {
 		children := make([]string, 0)
 		for _, child := range el.children {
-			children = append(children, child.Render())
+			children = append(children, child.RenderIndent(indent))
 		}
 
 		// Make sure text before / after is also indented
 		before := el.before
-		if len(before) > 0 {
-			before = fmt.Sprintf("%v%v%v", indent, nextIndent, before)
-			if len(children) > 0 {
-				before = fmt.Sprintf("%v\n", before)
-			}
-		}
 		after := el.after
-		if len(after) > 0 {
-			after = fmt.Sprintf("\n%v%v%v", indent, nextIndent, after)
-			if len(children) > 0 {
-				after = fmt.Sprintf("%v\n", after)
-			}
-		}
 
-		return fmt.Sprintf(
-			"%v<%v%v>\n%v%v%v\n%v</%v>",
-			nextIndent,
-			el.tagName,
-			strings.Join(attributes, ""),
-			before,
-			strings.Join(children, "\n"),
-			after,
-			nextIndent,
-			el.tagName,
-		)
+		if len(children) > 0 {
+			if len(before) > 0 {
+				before = fmt.Sprintf("%v%v%v\n", indent, nextIndent, before)
+			}
+			if len(after) > 0 {
+				after = fmt.Sprintf("\n%v%v%v\n", indent, nextIndent, after)
+			}
+			return fmt.Sprintf(
+				"%v<%v%v>\n%v%v%v\n%v</%v>",
+				nextIndent,
+				el.tagName,
+				strings.Join(attributes, ""),
+				before,
+				strings.Join(children, "\n"),
+				after,
+				nextIndent,
+				el.tagName,
+			)
+		} else {
+			return fmt.Sprintf(
+				"%v<%v%v>%v%v</%v>",
+				nextIndent,
+				el.tagName,
+				strings.Join(attributes, ""),
+				before,
+				after,
+				el.tagName,
+			)
+		}
 	}
 }
