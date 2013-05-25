@@ -2,6 +2,7 @@ package tingo
 
 import (
 	"fmt"
+	"log"
 	"strings"
 )
 
@@ -13,8 +14,8 @@ type Element struct {
 	isVoid     bool
 
 	children []*Element
-	before   string
-	after    string
+	prepend  string
+	append   string
 }
 
 func newVoidElement(tagName string) *Element {
@@ -38,15 +39,46 @@ func newElement(tagName string, children []*Element) *Element {
 	return element
 }
 
-func (el *Element) Id(i string) *Element {
-	el.attributes["id"] = i
+// Element methods
+// Available for all elements
+
+func (el *Element) Accesskey(key string) *Element {
+	el.attributes["accesskey"] = key
 	return el
 }
 
-func (el *Element) Class(c string) *Element {
-	el.attributes["class"] = c
+func (el *Element) Class(cls string) *Element {
+	el.attributes["class"] = cls
 	return el
 }
+
+func (el *Element) Id(id string) *Element {
+	el.attributes["id"] = id
+	return el
+}
+
+func (el *Element) Contenteditable(b bool) *Element {
+	if b {
+		el.attributes["contenteditable"] = "true"
+	} else {
+		el.attributes["contenteditable"] = "false"
+	}
+	return el
+}
+
+func (el *Element) Contextmenu(id string) *Element {
+	el.attributes["contextmenu"] = id
+	return el
+}
+
+func (el *Element) Dir(state string) *Element {
+	if state == "ltr" || state == "trl" || state == "auto" {
+		el.attributes["dir"] = state
+	}
+	return el
+}
+
+// Restricted
 
 func (el *Element) Type(t string) *Element {
 	el.attributes["type"] = t
@@ -58,13 +90,19 @@ func (el *Element) If(b bool) *Element {
 	return el
 }
 
-func (el *Element) Before(text string) *Element {
-	el.before = text
+func (el *Element) Prepend(text string) *Element {
+	if el.isVoid {
+		log.Println(`WARNING: "Prepend" has no effect on void elements.`)
+	}
+	el.prepend = text
 	return el
 }
 
-func (el *Element) After(text string) *Element {
-	el.after = text
+func (el *Element) Append(text string) *Element {
+	if el.isVoid {
+		log.Println(`WARNING: "Append" has no effect on void elements.`)
+	}
+	el.append = text
 	return el
 }
 
@@ -95,9 +133,9 @@ func (el *Element) Render() string {
 			`<%v%v>%v%v%v</%v>`,
 			el.tagName,
 			strings.Join(attributes, ""),
-			el.before,
+			el.prepend,
 			strings.Join(children, ""),
-			el.after,
+			el.append,
 			el.tagName,
 		)
 	}
@@ -137,8 +175,8 @@ func (el *Element) RenderIndent(indent string) string {
 		}
 
 		// Make sure text before / after is also indented
-		before := el.before
-		after := el.after
+		before := el.prepend
+		after := el.append
 
 		if len(children) > 0 {
 			if len(before) > 0 {
