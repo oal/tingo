@@ -52,11 +52,6 @@ func (el *Element) Class(cls string) *Element {
 	return el
 }
 
-func (el *Element) Id(id string) *Element {
-	el.attributes["id"] = id
-	return el
-}
-
 func (el *Element) Contenteditable(b bool) *Element {
 	if b {
 		el.attributes["contenteditable"] = "true"
@@ -74,6 +69,74 @@ func (el *Element) Contextmenu(id string) *Element {
 func (el *Element) Dir(state string) *Element {
 	if state == "ltr" || state == "trl" || state == "auto" {
 		el.attributes["dir"] = state
+	}
+	return el
+}
+
+func (el *Element) Draggable(b bool) *Element {
+	if b {
+		el.attributes["draggable"] = "true"
+	} else {
+		el.attributes["draggable"] = "false"
+	}
+	return el
+}
+
+func (el *Element) Dropzone(state string) *Element {
+	if state == "copy" || state == "move" || state == "link" {
+		el.attributes["dropzone"] = state
+	}
+	return el
+}
+
+func (el *Element) Hidden(b bool) *Element {
+	if b {
+		el.attributes["draggable"] = "true"
+	} else {
+		el.attributes["draggable"] = "false"
+	}
+	return el
+}
+
+func (el *Element) Id(id string) *Element {
+	el.attributes["id"] = id
+	return el
+}
+
+func (el *Element) Lang(lang string) *Element {
+	el.attributes["lang"] = lang
+	return el
+}
+
+func (el *Element) Spellcheck(b bool) *Element {
+	if b {
+		el.attributes["spellcheck"] = "true"
+	} else {
+		el.attributes["spellcheck"] = "false"
+	}
+	return el
+}
+
+func (el *Element) Style(style string) *Element {
+	el.attributes["style"] = style
+	return el
+}
+
+func (el *Element) Tabindex(index int) *Element {
+	el.attributes["tabindex"] = fmt.Sprintf("%v", index)
+	return el
+}
+
+func (el *Element) Title(title string) *Element {
+	el.attributes["title"] = title
+	return el
+}
+
+func (el *Element) Translate(b bool) *Element {
+	if b {
+		el.attributes["translate"] = "yes"
+	} else {
+		el.attributes["translate"] = "no"
 	}
 	return el
 }
