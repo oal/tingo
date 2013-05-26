@@ -2,7 +2,7 @@ package tingo
 
 import (
 	"fmt"
-	"log"
+	"html"
 	"strings"
 )
 
@@ -12,10 +12,11 @@ type Element struct {
 	attributes map[string]string
 	isHidden   bool
 	isVoid     bool
+	isSafe     bool
 
-	children []*Element
-	prepend  string
-	append   string
+	children    []*Element
+	textPrepend string
+	textAppend  string
 }
 
 func newVoidElement(tagName string) *Element {
@@ -148,24 +149,29 @@ func (el *Element) Type(t string) *Element {
 	return el
 }
 
+// Logic and additional methods
+
+func (el *Element) Safe(b bool) *Element {
+	// All text and attributes will be escaped by default. Call Safe(true) if you trust the input.
+	el.isSafe = b
+	return el
+}
+
 func (el *Element) If(b bool) *Element {
+	// If b is false, this element won't be rendered.
 	el.isHidden = !b
 	return el
 }
 
-func (el *Element) Prepend(text string) *Element {
-	if el.isVoid {
-		log.Println(`WARNING: "Prepend" has no effect on void elements.`)
-	}
-	el.prepend = text
+func (el *Element) TextPrepend(text string) *Element {
+	// Adds text before this element's children. Has no effect on void elements like <br>.
+	el.textPrepend = text
 	return el
 }
 
-func (el *Element) Append(text string) *Element {
-	if el.isVoid {
-		log.Println(`WARNING: "Append" has no effect on void elements.`)
-	}
-	el.append = text
+func (el *Element) TextAppend(text string) *Element {
+	// Adds text after this element's children. Has no effect on void elements like <br>.
+	el.textAppend = text
 	return el
 }
 
@@ -196,9 +202,9 @@ func (el *Element) Render() string {
 			`<%v%v>%v%v%v</%v>`,
 			el.tagName,
 			strings.Join(attributes, ""),
-			el.prepend,
+			el.textPrepend,
 			strings.Join(children, ""),
-			el.append,
+			el.textAppend,
 			el.tagName,
 		)
 	}
@@ -237,25 +243,32 @@ func (el *Element) RenderIndent(indent string) string {
 			children = append(children, child.RenderIndent(indent))
 		}
 
-		// Make sure text before / after is also indented
-		before := el.prepend
-		after := el.append
+		textPrepend := el.textPrepend
+		textAppend := el.textAppend
 
+		if !el.isSafe {
+			textPrepend = html.EscapeString(textPrepend)
+			textAppend = html.EscapeString(textAppend)
+		}
+
+		// If element has children, indent text and children.
+		// Otherwise, add appended/prepended text on the same line like <a>text</a>.
 		if len(children) > 0 {
-			if len(before) > 0 {
-				before = fmt.Sprintf("%v%v%v\n", indent, nextIndent, before)
+			// Make sure prepended / appended text is also indented
+			if len(textPrepend) > 0 {
+				textPrepend = fmt.Sprintf("%v%v%v\n", indent, nextIndent, textPrepend)
 			}
-			if len(after) > 0 {
-				after = fmt.Sprintf("\n%v%v%v\n", indent, nextIndent, after)
+			if len(textAppend) > 0 {
+				textAppend = fmt.Sprintf("\n%v%v%v\n", indent, nextIndent, textAppend)
 			}
 			return fmt.Sprintf(
 				"%v<%v%v>\n%v%v%v\n%v</%v>",
 				nextIndent,
 				el.tagName,
 				strings.Join(attributes, ""),
-				before,
+				textPrepend,
 				strings.Join(children, "\n"),
-				after,
+				textAppend,
 				nextIndent,
 				el.tagName,
 			)
@@ -265,8 +278,8 @@ func (el *Element) RenderIndent(indent string) string {
 				nextIndent,
 				el.tagName,
 				strings.Join(attributes, ""),
-				before,
-				after,
+				textPrepend,
+				textAppend,
 				el.tagName,
 			)
 		}
