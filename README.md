@@ -6,16 +6,34 @@ Creating a full template language is a lot of work, so I decided to try a differ
 Tingo is far from done, but it can generate some simple HTML.
 
 ### Example
-    debug := true
-    Html(
-		Head(
-			Title().Before("Hello World"),
-		),
-		Body(
-			H1().Before("Hello World"),
-			P().Before("This is a test document.").If(debug), // Will only be shown if debug is true.
-		),
-	).RenderIndent("\t")
+The example below is taken from one of the tests. It renders in 0.058ms on my computer.
+```go
+Html(
+    Head(
+        Title().Append("Page title"),
+        Style().Append("body { font-family: Arial, sans-serif }"),
+    ),
+    Body(
+        Header(
+            H1(A().Prepend("Page title")),
+            Nav(
+                Ul(
+                    Li(A().Prepend("Home")),
+                    Li(A().Prepend("About")),
+                    Li(A().Prepend("Services")),
+                ),
+            ),
+        ),
+        Section(
+            H2().Prepend("Lorem ipsum"),
+            P().Prepend("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent cursus odio sit amet metus blandit porttitor. Etiam convallis nibh eget erat cursus molestie auctor purus semper. Ut at suscipit mauris. Duis interdum nunc sodales neque consectetur fringilla. In hac habitasse platea dictumst. Integer nec ante purus. Morbi eu arcu sit amet felis fermentum adipiscing. Proin imperdiet lorem sed diam viverra at vestibulum libero imperdiet. Duis tortor orci, interdum eu eleifend blandit, dapibus non risus. Phasellus aliquam risus quis orci porta eleifend blandit diam mollis. Vivamus eu dolor mi, nec consequat diam. Pellentesque vel neque metus. Phasellus ac nisi orci, dapibus posuere diam. Nulla adipiscing, arcu in tempus facilisis, purus tellus bibendum massa, at consectetur odio lectus a lacus."),
+        ).Id("main"),
+        Footer(
+            P().Prepend("Tingo test page.").Class("credits"),
+        ),
+    ),
+).RenderIndent("\t")
+```
 
 ### License
 Tingo is available under the MIT license.
