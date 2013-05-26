@@ -154,6 +154,15 @@ func (el *Element) Type(t string) *Element {
 func (el *Element) Safe(b bool) *Element {
 	// All text and attributes will be escaped by default. Call Safe(true) if you trust the input.
 	el.isSafe = b
+
+	var walk func(*Element)
+	walk = func(element *Element) {
+		for _, child := range element.children {
+			child.isSafe = b
+			walk(child)
+		}
+	}
+	walk(el)
 	return el
 }
 
