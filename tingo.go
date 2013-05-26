@@ -142,17 +142,25 @@ func (el *Element) Translate(b bool) *Element {
 	return el
 }
 
-// Restricted
-
-func (el *Element) Type(t string) *Element {
-	el.attributes["type"] = t
+// Data takes a key and value, and sets a data-key="value" attribute on the element.
+func (el *Element) Data(key, value string) *Element {
+	el.attributes["data-"+key] = value
 	return el
 }
 
-// Logic and additional methods
+// SetAttr lets you set custom attributes on an element by specifying a key and a value,
+// resulting in a key="value" when rendered. Keep in mind that this method will not stop you
+// if you try to invent your own attributes, escape the value etc. The keys you set here
+// may also be overwritten by other methods.
+func (el *Element) SetAttr(key, value string) *Element {
+	el.attributes[key] = value
+	return el
+}
 
+// Safe defines whether or not an element's content should be escaped.
+// By default, all elements are escaped. Passing false to Safe skips the escaping step
+// for this element, and all its children.
 func (el *Element) Safe(b bool) *Element {
-	// All text and attributes will be escaped by default. Call Safe(true) if you trust the input.
 	el.isSafe = b
 
 	var walk func(*Element)
@@ -166,24 +174,25 @@ func (el *Element) Safe(b bool) *Element {
 	return el
 }
 
+// If takes a boolean, and the element will not be rendered if passed a false value.
 func (el *Element) If(b bool) *Element {
-	// If b is false, this element won't be rendered.
 	el.isHidden = !b
 	return el
 }
 
+// TextPrepend adds text before this element's children. Has no effect on void elements like <br>.
 func (el *Element) TextPrepend(text string) *Element {
-	// Adds text before this element's children. Has no effect on void elements like <br>.
 	el.textPrepend = text
 	return el
 }
 
+// TextAppend adds text after this element's children. Has no effect on void elements like <br>.
 func (el *Element) TextAppend(text string) *Element {
-	// Adds text after this element's children. Has no effect on void elements like <br>.
 	el.textAppend = text
 	return el
 }
 
+// Render produces compact HTML from this element, and all its children.
 func (el *Element) Render() string {
 	if el.isHidden {
 		return ""
@@ -219,6 +228,7 @@ func (el *Element) Render() string {
 	}
 }
 
+// Render produces indented HTML from this element, and all its children.
 func (el *Element) RenderIndent(indent string) string {
 	if el.isHidden {
 		return ""

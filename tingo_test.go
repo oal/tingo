@@ -5,11 +5,6 @@ import (
 	"testing"
 )
 
-func ExampleBody() {
-	fmt.Println(Body().Render())
-	// Output: <body></body>
-}
-
 func BenchmarkBody(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		Body().Render()
@@ -99,7 +94,7 @@ func TestRenderIndent(t *testing.T) {
 		),
 		Body(
 			H1().TextPrepend("This is a test <strong>escaped</strong>"),
-			Input().Type("text"),
+			TextInput("name"),
 		),
 	).RenderIndent("\t"))
 }
